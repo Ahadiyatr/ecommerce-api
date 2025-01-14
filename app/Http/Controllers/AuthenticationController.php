@@ -157,7 +157,7 @@ class AuthenticationController extends Controller
 
             return ResponseFormatter::success([
                 'token' => $token
-            ]);
+            ], 'Login Succes');
         }
 
         return ResponseFormatter::error(400, null, [

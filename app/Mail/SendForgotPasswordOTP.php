@@ -10,21 +10,24 @@ use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 use App\Models\User;
 
-class SendRegisterOTP extends Mailable
+class SendForgotPasswordOTP extends Mailable
 {
     use Queueable, SerializesModels;
 
     public $user;
 
-    public function __construct(User $user)
+    public $otp;
+
+    public function __construct(User $user, string $otp)
     {
         $this ->user = $user;
+        $this ->otp = $otp;
     }
 
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Register OTP',
+            subject: 'Reset Password OTP',
         );
     }
 
@@ -34,7 +37,7 @@ class SendRegisterOTP extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'mails.register-otp',
+            view: 'mails.reset-password-otp',
         );
     }
 
